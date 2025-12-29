@@ -15,7 +15,6 @@
     "@types/react-dom": "19.0.0",
     "@vitejs/plugin-react": "^5.1.2",
     "loader-utils": "3.2.1",
-    "typescript": "5.7.2",
     "vite": "^7.3.0"
   },
   "scripts": {
