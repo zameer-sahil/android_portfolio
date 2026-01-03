@@ -1,64 +1,303 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-  Sliders,
-  Rocket,
   Code,
   Smartphone,
   Zap,
-  TrendingUp,
   Users,
   Award,
+  Star,
+  ChevronRight,
+  Menu,
+  X,
   Github,
   Linkedin,
   Mail,
-  ExternalLink,
-  ChevronRight,
-  Terminal,
-  Layers,
-  Cpu,
-  Database,
-  GitBranch,
-  Sparkles,
-  Menu,
-  X,
-  Play,
   CheckCircle,
-  ArrowRight,
-  Star,
-  Download,
-  Heart,
+  Sparkles,
   MessageSquare,
+  TrendingUp,
   Eye,
+  Play,
   ZoomIn,
   ZoomOut,
   Maximize,
+  ShoppingCart,
+  Heart,
+  Clock,
+  Activity,
 } from "lucide-react";
 
 const AndroidPortfolio = () => {
   const [activeSection, setActiveSection] = useState("hero");
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [selectedProject, setSelectedProject] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [selectedImageModal, setSelectedImageModal] = useState(null);
+
+  const navItems = [
+    { id: "hero", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "skills", label: "Skills" },
+    { id: "projects", label: "Projects" },
+    { id: "impact", label: "Impact" },
+    { id: "testimonials", label: "Testimonials" },
+    { id: "contact", label: "Contact" },
+  ];
+
+  const stats = [
+    {
+      icon: Code,
+      value: "10+",
+      label: "Years Experience",
+      color: "from-cyan-400 to-blue-500",
+    },
+    {
+      icon: Smartphone,
+      value: "50+",
+      label: "Apps Delivered",
+      color: "from-purple-400 to-pink-500",
+    },
+    {
+      icon: Users,
+      value: "10M+",
+      label: "Active Users",
+      color: "from-green-400 to-emerald-500",
+    },
+    {
+      icon: Award,
+      value: "98%",
+      label: "Client Satisfaction",
+      color: "from-orange-400 to-red-500",
+    },
+  ];
+
+  const skills = [
+    {
+      name: "Kotlin & Java",
+      icon: Code,
+      level: 98,
+      color: "from-cyan-400 to-blue-500",
+      description: "Expert in modern Android development with Kotlin",
+    },
+    {
+      name: "Jetpack Compose",
+      icon: Sparkles,
+      level: 95,
+      color: "from-purple-400 to-pink-500",
+      description: "Building beautiful UIs with declarative paradigm",
+    },
+    {
+      name: "Architecture",
+      icon: TrendingUp,
+      level: 96,
+      color: "from-green-400 to-emerald-500",
+      description: "MVVM, Clean Architecture, and design patterns",
+    },
+    {
+      name: "Performance",
+      icon: Zap,
+      level: 94,
+      color: "from-orange-400 to-red-500",
+      description: "Optimization and memory management expertise",
+    },
+    {
+      name: "Testing",
+      icon: CheckCircle,
+      level: 92,
+      color: "from-blue-400 to-indigo-500",
+      description: "Unit, UI, and integration testing mastery",
+    },
+    {
+      name: "CI/CD",
+      icon: Activity,
+      level: 90,
+      color: "from-pink-400 to-rose-500",
+      description: "Automated pipelines and deployment workflows",
+    },
+  ];
+
+  const projects = [
+    {
+      title: "NextGen E-Commerce Platform",
+      longDescription:
+        "Revolutionary shopping experience with AI-powered recommendations, real-time inventory, AR product preview, and seamless checkout. Built with Jetpack Compose and modern architecture patterns for exceptional performance.",
+      tech: [
+        "Kotlin",
+        "Jetpack Compose",
+        "Hilt",
+        "Room",
+        "Retrofit",
+        "Coroutines",
+        "Flow",
+      ],
+      gradient: "from-cyan-400 to-blue-500",
+      images: [
+        { icon: ShoppingCart, title: "Shop", color: "from-cyan-400 to-blue-500" },
+        { icon: Heart, title: "Wishlist", color: "from-pink-400 to-rose-500" },
+        { icon: ShoppingCart, title: "Cart", color: "from-purple-400 to-pink-500" },
+        { icon: CheckCircle, title: "Checkout", color: "from-green-400 to-emerald-500" },
+      ],
+      features: [
+        "AI-powered product recommendations",
+        "Real-time inventory tracking",
+        "AR product visualization",
+        "One-tap checkout system",
+        "Multi-currency support",
+      ],
+      highlights: [
+        "40% increase in conversion rate",
+        "60% faster page load times",
+        "99.9% crash-free rate",
+        "4.8★ average rating",
+      ],
+      metrics: {
+        Users: "2M+",
+        Rating: "4.8★",
+        Downloads: "5M+",
+      },
+    },
+    {
+      title: "HealthTrack Pro",
+      longDescription:
+        "Comprehensive health and fitness tracking application with real-time activity monitoring, personalized workout plans, nutrition tracking, and integration with popular wearables. Features beautiful Material You design.",
+      tech: [
+        "Kotlin",
+        "Jetpack Compose",
+        "WorkManager",
+        "Room",
+        "Health Connect",
+        "ML Kit",
+      ],
+      gradient: "from-green-400 to-emerald-500",
+      images: [
+        { icon: Activity, title: "Activity", color: "from-green-400 to-emerald-500" },
+        { icon: TrendingUp, title: "Progress", color: "from-blue-400 to-indigo-500" },
+        { icon: Heart, title: "Health", color: "from-pink-400 to-rose-500" },
+        { icon: Award, title: "Goals", color: "from-orange-400 to-red-500" },
+      ],
+      features: [
+        "Real-time activity tracking",
+        "Personalized workout plans",
+        "Nutrition and calorie tracking",
+        "Wearable device integration",
+        "Social challenges and leaderboards",
+      ],
+      highlights: [
+        "Featured by Google Play",
+        "1M+ active monthly users",
+        "50% user retention rate",
+        "Editor's Choice Award",
+      ],
+      metrics: {
+        Users: "3M+",
+        Rating: "4.7★",
+        Workouts: "10M+",
+      },
+    },
+    {
+      title: "StreamFlow Entertainment",
+      longDescription:
+        "Next-generation streaming platform with offline downloads, personalized content discovery, multi-device sync, and adaptive streaming quality. Delivers Netflix-level performance with innovative features.",
+      tech: [
+        "Kotlin",
+        "ExoPlayer",
+        "Compose",
+        "Paging 3",
+        "DataStore",
+        "Media3",
+      ],
+      gradient: "from-purple-400 to-pink-500",
+      images: [
+        { icon: Play, title: "Watch", color: "from-purple-400 to-pink-500" },
+        { icon: Star, title: "Featured", color: "from-orange-400 to-red-500" },
+        { icon: Eye, title: "Discover", color: "from-cyan-400 to-blue-500" },
+        { icon: Clock, title: "Continue", color: "from-green-400 to-emerald-500" },
+      ],
+      features: [
+        "Adaptive bitrate streaming",
+        "Offline download support",
+        "Multi-profile management",
+        "Chromecast integration",
+        "Picture-in-picture mode",
+      ],
+      highlights: [
+        "99.9% uptime achieved",
+        "30% lower bandwidth usage",
+        "Instant playback start",
+        "4.9★ user satisfaction",
+      ],
+      metrics: {
+        Users: "5M+",
+        Rating: "4.9★",
+        Hours: "50M+",
+      },
+    },
+  ];
+
+  const achievements = [
+    {
+      icon: Award,
+      year: "2024",
+      title: "Google I/O Winner",
+      desc: "Innovative Android app recognized at Google I/O",
+      color: "from-cyan-400 to-blue-500",
+    },
+    {
+      icon: Star,
+      year: "2023",
+      title: "Editor's Choice",
+      desc: "Featured on Google Play Store homepage",
+      color: "from-purple-400 to-pink-500",
+    },
+    {
+      icon: TrendingUp,
+      year: "2023",
+      title: "Performance Leader",
+      desc: "Achieved 99.9% crash-free rate across all apps",
+      color: "from-green-400 to-emerald-500",
+    },
+    {
+      icon: Users,
+      year: "2022",
+      title: "10M+ Users",
+      desc: "Reached 10 million active users milestone",
+      color: "from-orange-400 to-red-500",
+    },
+  ];
+
+  const testimonials = [
+    {
+      name: "Sarah Chen",
+      role: "CTO, TechStart Inc",
+      text: "Outstanding developer who transformed our vision into a high-performing app. The attention to detail and technical expertise is unmatched.",
+      rating: 5,
+      avatar: "SC",
+    },
+    {
+      name: "Michael Rodriguez",
+      role: "Product Manager, HealthCorp",
+      text: "Delivered beyond expectations. The app performance is exceptional and our users love the experience. A true professional.",
+      rating: 5,
+      avatar: "MR",
+    },
+    {
+      name: "Emily Watson",
+      role: "CEO, StreamMedia",
+      text: "Exceptional work on our streaming platform. The technical challenges were handled brilliantly and the results speak for themselves.",
+      rating: 5,
+      avatar: "EW",
+    },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       const totalScroll =
         document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (window.scrollY / totalScroll) * 100;
-      setScrollProgress(progress);
+      const currentProgress = (window.scrollY / totalScroll) * 100;
+      setScrollProgress(currentProgress);
 
-      const sections = [
-        "hero",
-        "about",
-        "skills",
-        "projects",
-        "impact",
-        "testimonials",
-        "contact",
-      ];
-      const currentSection = sections.find((section) => {
+      const sections = navItems.map((item) => item.id);
+      const current = sections.find((section) => {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
@@ -66,7 +305,7 @@ const AndroidPortfolio = () => {
         }
         return false;
       });
-      if (currentSection) setActiveSection(currentSection);
+      if (current) setActiveSection(current);
     };
 
     const handleMouseMove = (e) => {
@@ -81,755 +320,66 @@ const AndroidPortfolio = () => {
     };
   }, []);
 
-  const skills = [
-    {
-      icon: Code,
-      name: "Kotlin",
-      level: 98,
-      color: "from-cyan-400 to-purple-500",
-      description: "Expert in Kotlin with 8+ years",
-    },
-    {
-      icon: Smartphone,
-      name: "Jetpack Compose",
-      level: 95,
-      color: "from-purple-400 to-pink-500",
-      description: "Building modern declarative UIs",
-    },
-    {
-      icon: Layers,
-      name: "MVVM/MVI Architecture",
-      level: 96,
-      color: "from-cyan-500 to-blue-500",
-      description: "Scalable app architectures",
-    },
-    {
-      icon: Cpu,
-      name: "Performance Optimization",
-      level: 94,
-      color: "from-purple-500 to-indigo-500",
-      description: "Memory & battery optimization",
-    },
-    {
-      icon: Database,
-      name: "Room/Coroutines/Flow",
-      level: 97,
-      color: "from-blue-400 to-cyan-400",
-      description: "Async data management",
-    },
-    {
-      icon: GitBranch,
-      name: "CI/CD & Testing",
-      level: 93,
-      color: "from-indigo-400 to-purple-400",
-      description: "Automated testing & deployment",
-    },
-  ];
-
-  const projects = [
-    {
-      title: "Postify — AI-Powered LinkedIn Growth App",
-      description:
-        "Postify is an AI-powered LinkedIn growth platform that helps professionals stand out, grow faster, and turn visibility into real opportunities. It combines profile optimization, AI content creation, smart scheduling, and performance analytics into one seamless workflow—removing the guesswork from LinkedIn success. Users can upload their resume to instantly generate an ATS-optimized LinkedIn profile, while the AI engine creates high-quality posts, captions, and outreach messages aligned with LinkedIn best practices. Built-in analytics help track growth and refine strategy over time. Designed for scalability, performance, and exceptional UX, Postify is a product-grade solution—not just another content tool.",
-      longDescription:
-        "Postify is an AI-powered LinkedIn growth platform that helps professionals stand out, grow faster, and turn visibility into real opportunities. It combines profile optimization, AI content creation, smart scheduling, and performance analytics into one seamless workflow—removing the guesswork from LinkedIn success. Users can upload their resume to instantly generate an ATS-optimized LinkedIn profile, while the AI engine creates high-quality posts, captions, and outreach messages aligned with LinkedIn best practices. Built-in analytics help track growth and refine strategy over time. Designed for scalability, performance, and exceptional UX, Postify is a product-grade solution—not just another content tool.",
-      impact: ["2M+ downloads", "4.8★ rating", "40% faster than competitors"],
-      tech: [
-        "Kotlin",
-        "AI integration",
-        "API & data handling",
-        "Hilt",
-        "Firebase",
-        "Product-focused development",
-      ],
-      gradient: "from-cyan-500 via-blue-500 to-purple-600",
-      metrics: {
-        Stability: "99%",
-        Precision: "High",
-        Experience: "Highly Rated",
-      },
-      images: [
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766679932/Hotpot_0_l2w3og.png",
-          alt: "Positfy Dashboard",
-          title: "Dashboard",
-          color: "from-cyan-400 to-blue-500",
-          icon: TrendingUp,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766679926/Hotpot_1_hliuyc.png",
-          alt: "Positfy Analytics",
-          title: "Analytics",
-          color: "from-blue-400 to-purple-500",
-          icon: TrendingUp,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766679929/Hotpot_2_zcimit.png",
-          alt: "Positfy Transactions",
-          title: "Transactions",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766679928/8_z2rbq7.png",
-          alt: "Positfy Reports",
-          title: "Reports",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766679925/Hotpot_4_nkpqqk.png",
-          alt: "Positfy Settings",
-          title: "Settings",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766679920/5_xbxjma.png",
-          alt: "Positfy Settings",
-          title: "Settings",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766679923/6_ht6hlq.png",
-          alt: "Positfy Settings",
-          title: "Settings",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766679923/7_vqplt3.png",
-          alt: "Positfy Settings",
-          title: "Settings",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-      ],
-      features: [
-        "ATS-optimized LinkedIn profile from resume",
-        "AI-generated posts & outreach messages",
-        "Content scheduling & planning",
-        "Engagement & growth analytics",
-      ],
-      highlights: [
-        "All-in-one LinkedIn growth solution",
-        "Saves time with AI automation",
-        "Clean UI & smooth user experience",
-        "Built for scalability",
-      ],
-    },
-    {
-      title: "Unilever Enterprise Suite: Powering 4-Country Operations",
-      description:
-        "Engineered mission-critical Android applications trusted by Unilever across Pakistan, Bangladesh, Thailand, and the Philippines—handling millions in daily transactions. Built an enterprise-grade, multi-app ecosystem that revolutionized Unilever's supply chain operations. From warehouse floors to customer doorsteps, these apps orchestrate seamless logistics across international markets.",
-      longDescription:
-        "Engineered mission-critical Android applications trusted by Unilever across Pakistan, Bangladesh, Thailand, and the Philippines—handling millions in daily transactions. Built an enterprise-grade, multi-app ecosystem that revolutionized Unilever's supply chain operations. From warehouse floors to customer doorsteps, these apps orchestrate seamless logistics across international markets.",
-      impact: ["2M+ downloads", "4.8★ rating", "40% faster than competitors"],
-      tech: [
-        "Kotlin",
-        "AI integration",
-        "API & data handling",
-        "Hilt",
-        "Firebase",
-        "Product-focused development",
-      ],
-      gradient: "from-cyan-500 via-blue-500 to-purple-600",
-      metrics: {
-        Deployed: "4 Countries",
-        Stability: "99.5% Crash-Free",
-        Performance: "2-Second Load",
-      },
-      images: [
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766904710/Hotpot_0_fssx5j.png",
-          alt: "Positfy Dashboard",
-          title: "Dashboard",
-          color: "from-cyan-400 to-blue-500",
-          icon: TrendingUp,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766904704/Hotpot_1_ufomg1.png",
-          alt: "Positfy Analytics",
-          title: "Analytics",
-          color: "from-blue-400 to-purple-500",
-          icon: TrendingUp,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766904759/Hotpot_2_gntmqe.png",
-          alt: "Positfy Transactions",
-          title: "Transactions",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766904833/5_jjwioy.png",
-          alt: "Positfy Reports",
-          title: "Reports",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766904793/10_neocup.png",
-          alt: "Positfy Settings",
-          title: "Settings",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766904865/Hotpot_4_as9gxj.png",
-          alt: "Positfy Settings",
-          title: "Settings",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766904902/16_ketwjw.png",
-          alt: "Positfy Settings",
-          title: "Settings",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766904979/15_jyzu19.png",
-          alt: "Positfy Settings",
-          title: "Settings",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766904897/14_fkypvd.png",
-          alt: "Positfy Settings",
-          title: "Settings",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766904810/13_mgxjyg.png",
-          alt: "Positfy Settings",
-          title: "Settings",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-      ],
-      features: [
-        "Multi-Country Operations",
-        "Complete Enterprise Suite",
-        "Offline-First Architecture",
-        "Enterprise Security",
-      ],
-      highlights: [
-        "Multi-Module Architecture with 15+ Flavors",
-        "99.5% Crash-Free Rate",
-        "Weekly Multi-Country Releases",
-        "70% Faster Deployments",
-      ],
-    },
-    {
-      title: "Recipe Expert",
-      description:
-        "Recipe Expert is a smart cooking companion for home cooks and food enthusiasts. It offers a rich collection of recipes from multiple cuisines, with ingredient-based search to reduce food waste. Users get personalized recommendations, step-by-step instructions, and can upload or share their own recipes. Explore global cuisines and helpful cooking tips. Check the live app on Google Play Store: https://play.google.com/store/apps/details?id=com.hamzadev.recipeexpert.",
-      longDescription:
-        "Recipe Expert is a smart cooking companion for home cooks and food enthusiasts. It offers a rich collection of recipes from multiple cuisines, with ingredient-based search to reduce food waste. Users get personalized recommendations, step-by-step instructions, and can upload or share their own recipes. Explore global cuisines and helpful cooking tips. Check the live app on Google Play Store: https://play.google.com/store/apps/details?id=com.hamzadev.recipeexpert.",
-      impact: ["500K+ active users", "Featured by Google Play", "99.9% uptime"],
-      tech: [
-        "Kotlin ",
-        "ML Kit",
-        "WorkManager",
-        "Retrofit",
-        "Firebase",
-        "Kotlin Coroutines",
-        "Hilt",
-      ],
-      gradient: "from-purple-500 via-pink-500 to-cyan-500",
-      metrics: {
-        Engagement: "1000+ Recipes",
-        Rating: "4.2★",
-        featured: "Google Play",
-      },
-      images: [
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766245356/1_tpfh4s.jpg",
-          alt: "Health Dashboard",
-          title: "Health Dashboard",
-          color: "from-purple-400 to-pink-500",
-          icon: Heart,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766245355/2_eyktwm.jpg",
-          alt: "AI Insights",
-          title: "AI Insights",
-          color: "from-pink-400 to-cyan-500",
-          icon: Sparkles,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766245356/4_tzwvfd.jpg",
-          alt: "Activity Tracking",
-          title: "Activity Tracking",
-          color: "from-cyan-400 to-purple-500",
-          icon: TrendingUp,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766245355/2_eyktwm.jpg",
-          alt: "Activity Tracking",
-          title: "Activity Tracking",
-          color: "from-cyan-400 to-purple-500",
-          icon: TrendingUp,
-        },
-      ],
-      features: [
-        "Recipe Discovery",
-        "Personalized Experience",
-        "Step-by-Step Guidance",
-        "Community Features",
-      ],
-      highlights: [
-        "Kotlin & Android Jetpack",
-        "Firebase Backend",
-        "Machine Learning Integration ",
-        "Advanced Search Algorithm",
-      ],
-    },
-    {
-      title: "Shop Tracking ",
-      description:
-        "The Shop Tracking App is a comprehensive solution designed to monitor and analyze the progress of distributors and shops effectively. The app allows administrators to track distributor activities, including shop visits, task completion, and overall performance. It also provides insights into shop-specific metrics, ensuring better visibility into operations and progress. With real-time tracking and detailed analytics, the app helps optimize distributor workflows and ensures shops are managed efficiently. The intuitive interface and robust features make it an essential tool for businesses looking to streamline their tracking and performance evaluation processes.",
-      longDescription:
-        "The Shop Tracking App is a comprehensive solution designed to monitor and analyze the progress of distributors and shops effectively. The app allows administrators to track distributor activities, including shop visits, task completion, and overall performance. It also provides insights into shop-specific metrics, ensuring better visibility into operations and progress. With real-time tracking and detailed analytics, the app helps optimize distributor workflows and ensures shops are managed efficiently. The intuitive interface and robust features make it an essential tool for businesses looking to streamline their tracking and performance evaluation processes.",
-      impact: [
-        "1M+ streams daily",
-        "50% reduction in buffering",
-        "TechCrunch featured",
-      ],
-      tech: [
-        "Android Development ",
-        "Smart Geolocation & Mapping ",
-        "Dynamic Data Visualization",
-        "Cloud-Powered Backend ",
-        "RESTful API Integration",
-        "Material Design UI/UX",
-      ],
-      gradient: "from-blue-500 via-cyan-500 to-purple-500",
-      metrics: {
-        Results: "5000+ Shop Visits Tracked",
-        Achievements: "40% Time Savings",
-        Performance: "99.8%",
-      },
-      images: [
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766299435/image1_evyhi2.jpg",
-          alt: "Video Player",
-          title: "Video Player",
-          color: "from-blue-400 to-cyan-500",
-          icon: Play,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766299426/image2_cmfvzz.jpg",
-          alt: "Content Library",
-          title: "Content Library",
-          color: "from-cyan-400 to-purple-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766299427/image3_y1q0t8.jpg",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766299429/image4_bladvs.jpg",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766299428/image5_attcbm.jpg",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766299428/feedback_cg3uqe.jpg",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-      ],
-      features: [
-        "Live Distributor Tracking ",
-        "Shop Management System",
-        "Smart Shop Hub",
-        "Task & Activity Monitoring ",
-      ],
-      highlights: [
-        "Real-time Synchronization",
-        "Zero-Friction Experience",
-        "Works Anywhere, Anytime",
-        "Smart Auto-Sync",
-      ],
-    },
-    {
-      title: "RetailAudit & MarkitSurvey - B2B Field Apps ",
-      description:
-        "Developed two connected Android applications for field teams conducting store audits and market surveys.Challenge: Field teams needed to collect data offline and sync when internet was available. Manual data entry was consuming 15 hours weekly.Solution: Built offline-first apps with local SQLite databases, automatic sync, and JSON API integration that streamlined data flow across three different apps. Technologies: Java, SQLite, Retrofit, Node.js (API optimization) Results: - Reduced manual data entry by 15 hours per week- Saved 200+ hours annually on database management - Enabled seamless offline-to-online data sync Client: Markematics Digital (Jan 2024 - Dec 2024)",
-      longDescription:
-        "Developed two connected Android applications for field teams conducting store audits and market surveys.Challenge: Field teams needed to collect data offline and sync when internet was available. Manual data entry was consuming 15 hours weekly.Solution: Built offline-first apps with local SQLite databases, automatic sync, and JSON API integration that streamlined data flow across three different apps. Technologies: Java, SQLite, Retrofit, Node.js (API optimization) Results: - Reduced manual data entry by 15 hours per week- Saved 200+ hours annually on database management - Enabled seamless offline-to-online data sync Client: Markematics Digital (Jan 2024 - Dec 2024)",
-      impact: [
-        "1M+ streams daily",
-        "50% reduction in buffering",
-        "TechCrunch featured",
-      ],
-      tech: [
-        "Kotlin",
-        "Retrofit",
-        "Node.js",
-        "Offline-First Architecture ",
-        "Data Synchronization",
-        "Database Optimization",
-      ],
-      gradient: "from-blue-500 via-cyan-500 to-purple-500",
-      metrics: {
-        Scale: "1000+ Daily Syncs",
-        Accuracy: "99%",
-        Efficiency: "900 Hours Saved ",
-      },
-      images: [
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766314769/Hotpot_0_ifzlid.png",
-          alt: "Video Player",
-          title: "Video Player",
-          color: "from-blue-400 to-cyan-500",
-          icon: Play,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766314783/Hotpot_1_lohei7.png",
-          alt: "Video Player",
-          title: "Video Player",
-          color: "from-blue-400 to-cyan-500",
-          icon: Play,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766314768/Hotpot_2_otsuph.png",
-          alt: "Content Library",
-          title: "Content Library",
-          color: "from-cyan-400 to-purple-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766314789/Hotpot_3_jkpu6m.png",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766314768/Hotpot_4_j2whmh.png",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766314770/Hotpot_5_haecbc.png",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766314786/Hotpot_7_ufvib0.png",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766314774/Hotpot_8_lcvlaq.png",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766314779/Hotpot_9_gf9kmm.png",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766314783/Hotpot_10_o4jvyr.png",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766314768/Hotpot_6_v5kdw9.png",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766314784/Hotpot_12_ekralz.png",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766314787/Hotpot_14_ajoiu0.png",
-          alt: "Social Feed",
-          title: "Social Feed",
-          color: "from-purple-400 to-blue-500",
-          icon: Users,
-        },
-      ],
-      features: [
-        "Complete Offline Functionality ",
-        "Automatic Background Sync",
-        "Local SQLite Database",
-        "Real-Time API Synchronization ",
-      ],
-      highlights: [
-        "Data Integrity Guaranteed ",
-        "Cross-App Data Flow",
-        "Multi-Device Support",
-        "Smart Auto-Sync",
-      ],
-    },
-    {
-      title: "Laugh & Rhyme",
-      description:
-        "Laugh & Rhyme brings a world of fun and creativity to your fingertips with a wide collection of jokes, riddles, and poetry in both English and Urdu. Enjoy daily humor, challenge yourself with engaging riddles, and explore user-generated content. With AI-powered features, personalize your experience and share your own creations in this interactive entertainment app.",
-      longDescription:
-        "Laugh & Rhyme brings a world of fun and creativity to your fingertips with a wide collection of jokes, riddles, and poetry in both English and Urdu. Enjoy daily humor, challenge yourself with engaging riddles, and explore user-generated content. With AI-powered features, personalize your experience and share your own creations in this interactive entertainment app.",
-      impact: ["2M+ downloads", "4.8★ rating", "40% faster than competitors"],
-      tech: ["Kotlin", "Compose", "JSON", "Hilt", "Room"],
-      gradient: "from-cyan-500 via-blue-500 to-purple-600",
-      metrics: {
-        Scale: "1000+ Entries",
-        Precision: "99% Stable",
-        Delight: "Highly Rated",
-      },
-      images: [
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766295807/image1_wag1eg.png",
-          alt: "Positfy Dashboard",
-          title: "Dashboard",
-          color: "from-cyan-400 to-blue-500",
-          icon: TrendingUp,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766295807/image2_u1t5jb.png",
-          alt: "Positfy Analytics",
-          title: "Analytics",
-          color: "from-blue-400 to-purple-500",
-          icon: TrendingUp,
-        },
-
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766295807/image3_wsncz2.png",
-          alt: "Positfy Reports",
-          title: "Reports",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766295806/image5_ulrmll.png",
-          alt: "Positfy Settings",
-          title: "Settings",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-
-        {
-          src: "https://res.cloudinary.com/dfyphobvp/image/upload/v1766295806/image4_sugwwe.png",
-          alt: "Positfy Settings",
-          title: "Settings",
-          color: "from-purple-400 to-pink-500",
-          icon: Database,
-        },
-      ],
-      features: [
-        "Bilingual Support (English & Urdu)",
-        "AI-Powered Personalization",
-        "Extensive Content Library",
-        "Social Sharing & Bookmarking",
-      ],
-      highlights: [
-        "Java & Android SDK",
-        "Offline-first architecture",
-        "Material Design 3",
-        "JSON Data Parsing",
-      ],
-    },
-  ];
-
-  const achievements = [
-    {
-      icon: Sliders,
-      title: "Android UI Performance",
-      desc: "Jetpack Compose Performance Optimization",
-      year: "2026",
-      color: "from-yellow-400 to-orange-500",
-    },
-    {
-      icon: Rocket,
-      title: "Deployed in multiple countries",
-      desc: "(Pakistan, Bangladesh, Thailand, Philippines)",
-      year: "2025",
-      color: "from-cyan-400 to-blue-500",
-    },
-    {
-      icon: TrendingUp,
-      title: "Top 1% Developer",
-      desc: "Android dev community",
-      year: "2026",
-      color: "from-purple-400 to-pink-500",
-    },
-    {
-      icon: Zap,
-      title: "5+ Years Experience",
-      desc: "Building production apps",
-      year: "2020-2026",
-      color: "from-green-400 to-cyan-500",
-    },
-  ];
-
-  const testimonials = [
-    {
-      name: "Ali Zohair",
-      role: "Project Lead",
-      text: "Delivered a high-quality Android application with clean architecture and efficient performance. Communication and reliability throughout the project were outstanding.",
-      rating: 5,
-      avatar: "AJ",
-    },
-    {
-      name: "Muhammad Saleh",
-      role: "Product Manager",
-      text: "Demonstrated exceptional problem-solving skills and attention to detail. The app was intuitive, smooth, and met all project requirements on time.",
-      rating: 5,
-      avatar: "PS",
-    },
-    {
-      name: "Fahad Zafar",
-      role: "Tech Consultant",
-      text: "Professional, knowledgeable, and reliable. Delivered a scalable Android solution with optimized UI and robust features, making collaboration seamless.",
-      rating: 5,
-      avatar: "DK",
-    },
-  ];
-
-  const stats = [
-    {
-      label: "Years Experience",
-      value: "5+",
-      color: "from-cyan-400 to-blue-500",
-      icon: Zap,
-    },
-    {
-      label: "Projects Delivered",
-      value: "25+",
-      color: "from-purple-400 to-pink-500",
-      icon: Code,
-    },
-    {
-      label: "Total Users Reached",
-      value: "10k+",
-      color: "from-blue-400 to-cyan-500",
-      icon: Users,
-    },
-    {
-      label: "Client Satisfaction",
-      value: "99%",
-      color: "from-pink-400 to-purple-500",
-      icon: Award,
-    },
-  ];
-
-  const navItems = [
-    { id: "hero", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
-    { id: "testimonials", label: "Testimonials" },
-    { id: "contact", label: "Contact" },
-  ];
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
       setIsMenuOpen(false);
     }
   };
 
-  // Enhanced Image Modal with Zoom and Pan
   const ImageModal = ({ image, project, onClose }) => {
     const [scale, setScale] = useState(1);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-    const [lastTouchDistance, setLastTouchDistance] = useState(null);
-    const imageRef = useRef(null);
+    const [lastTouchDistance, setLastTouchDistance] = useState(0);
     const containerRef = useRef(null);
+    const imageRef = useRef(null);
 
-    // Reset state when image changes
-    useEffect(() => {
+    const handleZoomIn = () => setScale((s) => Math.min(s + 0.5, 4));
+    const handleZoomOut = () => setScale((s) => Math.max(s - 0.5, 1));
+    const handleResetZoom = () => {
       setScale(1);
       setPosition({ x: 0, y: 0 });
-      setIsDragging(false);
-      setLastTouchDistance(null);
-    }, [image?.src, image?.title]);
+    };
 
-    // Calculate distance between two touch points
+    const handleWheel = (e) => {
+      e.preventDefault();
+      const delta = e.deltaY * -0.01;
+      setScale((s) => Math.max(1, Math.min(4, s + delta)));
+    };
+
+    const handleMouseDown = (e) => {
+      if (scale > 1) {
+        setIsDragging(true);
+        setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
+      }
+    };
+
+    const handleMouseMove = (e) => {
+      if (isDragging && scale > 1) {
+        setPosition({
+          x: e.clientX - dragStart.x,
+          y: e.clientY - dragStart.y,
+        });
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
     const getTouchDistance = (touches) => {
       const dx = touches[0].clientX - touches[1].clientX;
       const dy = touches[0].clientY - touches[1].clientY;
       return Math.sqrt(dx * dx + dy * dy);
     };
 
-    // Get center point between two touches
-    const getTouchCenter = (touches) => {
-      return {
-        x: (touches[0].clientX + touches[1].clientX) / 2,
-        y: (touches[0].clientY + touches[1].clientY) / 2,
-      };
-    };
-
-    // Constrain position to prevent image from going out of bounds
-    const constrainPosition = (pos, currentScale) => {
-      if (!imageRef.current || !containerRef.current) return pos;
-
-      const container = containerRef.current.getBoundingClientRect();
-      const img = imageRef.current.getBoundingClientRect();
-
-      const scaledWidth = img.width * currentScale;
-      const scaledHeight = img.height * currentScale;
-
-      const maxX = Math.max(0, (scaledWidth - container.width) / 2);
-      const maxY = Math.max(0, (scaledHeight - container.height) / 2);
-
-      return {
-        x: Math.max(-maxX, Math.min(maxX, pos.x)),
-        y: Math.max(-maxY, Math.min(maxY, pos.y)),
-      };
-    };
-
-    // Handle touch start
     const handleTouchStart = (e) => {
       if (e.touches.length === 2) {
-        // Pinch gesture
         setLastTouchDistance(getTouchDistance(e.touches));
-        setIsDragging(false);
       } else if (e.touches.length === 1 && scale > 1) {
-        // Pan gesture (only when zoomed)
         setIsDragging(true);
         setDragStart({
           x: e.touches[0].clientX - position.x,
@@ -838,105 +388,23 @@ const AndroidPortfolio = () => {
       }
     };
 
-    // Handle touch move
     const handleTouchMove = (e) => {
-      e.preventDefault();
-
-      if (e.touches.length === 2 && lastTouchDistance) {
-        // Pinch zoom
-        const currentDistance = getTouchDistance(e.touches);
-        const scaleChange = currentDistance / lastTouchDistance;
-        const newScale = Math.max(1, Math.min(4, scale * scaleChange));
-
-        setScale(newScale);
-        setLastTouchDistance(currentDistance);
-
-        // Adjust position to keep image centered during zoom
-        if (newScale === 1) {
-          setPosition({ x: 0, y: 0 });
-        } else {
-          setPosition(constrainPosition(position, newScale));
-        }
+      if (e.touches.length === 2) {
+        const distance = getTouchDistance(e.touches);
+        const delta = distance - lastTouchDistance;
+        setScale((s) => Math.max(1, Math.min(4, s + delta * 0.01)));
+        setLastTouchDistance(distance);
       } else if (e.touches.length === 1 && isDragging && scale > 1) {
-        // Pan
-        const newPos = {
+        setPosition({
           x: e.touches[0].clientX - dragStart.x,
           y: e.touches[0].clientY - dragStart.y,
-        };
-        setPosition(constrainPosition(newPos, scale));
-      }
-    };
-
-    // Handle touch end
-    const handleTouchEnd = (e) => {
-      if (e.touches.length < 2) {
-        setLastTouchDistance(null);
-      }
-      if (e.touches.length === 0) {
-        setIsDragging(false);
-      }
-    };
-
-    // Mouse wheel zoom
-    const handleWheel = (e) => {
-      e.preventDefault();
-      const delta = e.deltaY > 0 ? 0.9 : 1.1;
-      const newScale = Math.max(1, Math.min(4, scale * delta));
-
-      setScale(newScale);
-
-      if (newScale === 1) {
-        setPosition({ x: 0, y: 0 });
-      } else {
-        setPosition(constrainPosition(position, newScale));
-      }
-    };
-
-    // Mouse drag for desktop
-    const handleMouseDown = (e) => {
-      if (scale > 1) {
-        setIsDragging(true);
-        setDragStart({
-          x: e.clientX - position.x,
-          y: e.clientY - position.y,
         });
       }
     };
 
-    const handleMouseMove = (e) => {
-      if (isDragging && scale > 1) {
-        const newPos = {
-          x: e.clientX - dragStart.x,
-          y: e.clientY - dragStart.y,
-        };
-        setPosition(constrainPosition(newPos, scale));
-      }
-    };
-
-    const handleMouseUp = () => {
+    const handleTouchEnd = () => {
       setIsDragging(false);
-    };
-
-    // Zoom controls
-    const handleZoomIn = () => {
-      const newScale = Math.min(4, scale + 0.5);
-      setScale(newScale);
-      setPosition(constrainPosition(position, newScale));
-    };
-
-    const handleZoomOut = () => {
-      const newScale = Math.max(1, scale - 0.5);
-      setScale(newScale);
-      if (newScale === 1) {
-        setPosition({ x: 0, y: 0 });
-      } else {
-        setPosition(constrainPosition(position, newScale));
-      }
-    };
-
-    const handleResetZoom = () => {
-      setScale(1);
-      setPosition({ x: 0, y: 0 });
+      setLastTouchDistance(0);
     };
 
     if (!image || !project) return null;
@@ -947,7 +415,7 @@ const AndroidPortfolio = () => {
         onClick={onClose}
       >
         <div
-          className="relative max-w-md w-full"
+          className="relative max-w-md w-full mx-4"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
@@ -1169,7 +637,7 @@ const AndroidPortfolio = () => {
             </span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 sm:mb-8 leading-tight px-4">
             <span
               className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient"
               style={{ backgroundSize: "200% auto" }}
@@ -1182,7 +650,7 @@ const AndroidPortfolio = () => {
             </span>
           </h1>
 
-          <p className="text-lg sm:text-xl md:text-2xl text-slate-400 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-400 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed font-light px-4">
             Transforming ideas into{" "}
             <span className="text-cyan-400 font-semibold">
               production-ready apps
@@ -1194,13 +662,13 @@ const AndroidPortfolio = () => {
             .
           </p>
 
-          <div className="flex flex-wrap gap-4 justify-center mb-16">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center mb-12 sm:mb-16 px-4">
             <button
               onClick={() => scrollToSection("projects")}
-              className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-semibold overflow-hidden shadow-2xl shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all duration-300 hover:scale-105"
+              className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-semibold overflow-hidden shadow-2xl shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <span className="relative flex items-center gap-2">
+              <span className="relative flex items-center justify-center gap-2">
                 View Projects
                 <ChevronRight
                   className="group-hover:translate-x-1 transition-transform"
@@ -1210,7 +678,7 @@ const AndroidPortfolio = () => {
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="px-8 py-4 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl font-semibold hover:bg-slate-800/60 hover:border-cyan-500/50 transition-all duration-300 hover:scale-105 shadow-lg"
+              className="px-6 sm:px-8 py-3 sm:py-4 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl font-semibold hover:bg-slate-800/60 hover:border-cyan-500/50 transition-all duration-300 hover:scale-105 shadow-lg w-full sm:w-auto"
             >
               Get In Touch
             </button>
@@ -1244,54 +712,54 @@ const AndroidPortfolio = () => {
         </div>
       </section>
 
-      <section id="about" className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-16 items-center mb-20">
+      <section id="about" className="py-20 sm:py-32 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid md:grid-cols-2 gap-12 sm:gap-16 items-center mb-16 sm:mb-20">
             <div>
-              <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-slate-800/40 backdrop-blur-xl rounded-full border border-cyan-500/20">
+              <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-4 py-2 bg-slate-800/40 backdrop-blur-xl rounded-full border border-cyan-500/20">
                 <Sparkles size={16} className="text-cyan-400" />
                 <span className="text-cyan-400 text-sm font-medium">
                   ABOUT ME
                 </span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-white">
                 Passionate About Creating Impact
               </h2>
-              <p className="text-lg text-slate-400 mb-6 leading-relaxed font-light">
+              <p className="text-base sm:text-lg text-slate-400 mb-4 sm:mb-6 leading-relaxed font-light">
                 With over a decade of experience in Android development, I
                 specialize in crafting high-performance, scalable applications
                 that serve millions of users worldwide. My expertise spans from
                 modern UI development with Jetpack Compose to complex backend
                 integrations and performance optimization.
               </p>
-              <p className="text-lg text-slate-400 leading-relaxed font-light">
+              <p className="text-base sm:text-lg text-slate-400 leading-relaxed font-light">
                 I believe in writing clean, maintainable code and following
                 industry best practices. Every project is an opportunity to push
                 boundaries and deliver exceptional results that exceed
                 expectations.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6">
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="group relative p-8 bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 rounded-3xl hover:border-cyan-500/50 transition-all duration-500 hover:scale-105 shadow-xl"
+                  className="group relative p-6 sm:p-8 bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 rounded-2xl sm:rounded-3xl hover:border-cyan-500/50 transition-all duration-500 hover:scale-105 shadow-xl"
                 >
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 rounded-3xl transition-opacity duration-500`}
+                    className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 rounded-2xl sm:rounded-3xl transition-opacity duration-500`}
                   />
                   <div className="relative text-center">
                     <div
-                      className={`w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-br ${stat.color} p-3`}
+                      className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 rounded-xl bg-gradient-to-br ${stat.color} p-2.5 sm:p-3`}
                     >
                       <stat.icon className="w-full h-full text-white" />
                     </div>
                     <div
-                      className={`text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}
+                      className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}
                     >
                       {stat.value}
                     </div>
-                    <div className="text-sm text-slate-400 font-light">
+                    <div className="text-xs sm:text-sm text-slate-400 font-light">
                       {stat.label}
                     </div>
                   </div>
@@ -1302,39 +770,39 @@ const AndroidPortfolio = () => {
         </div>
       </section>
 
-      <section id="skills" className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-slate-800/40 backdrop-blur-xl rounded-full border border-purple-500/20">
+      <section id="skills" className="py-20 sm:py-32 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-16 sm:mb-20">
+            <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-4 py-2 bg-slate-800/40 backdrop-blur-xl rounded-full border border-purple-500/20">
               <Sparkles size={16} className="text-purple-400" />
               <span className="text-purple-400 text-sm font-medium">
                 EXPERTISE
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white px-4">
               Technical Excellence
             </h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto font-light">
+            <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-light px-4">
               Mastery across the entire Android development stack with
               production-proven expertise
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {skills.map((skill, index) => (
               <div
                 key={skill.name}
-                className="group relative p-8 bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 rounded-3xl hover:border-cyan-500/50 transition-all duration-500 hover:scale-105 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20"
+                className="group relative p-6 sm:p-8 bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 rounded-2xl sm:rounded-3xl hover:border-cyan-500/50 transition-all duration-500 hover:scale-105 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative">
                   <div
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${skill.color} p-4 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                    className={`w-14 h-14 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${skill.color} p-3.5 sm:p-4 mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
                   >
                     <skill.icon className="w-full h-full text-white" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-white">
+                  <h3 className="text-lg sm:text-xl font-bold mb-2 text-white">
                     {skill.name}
                   </h3>
                   <p className="text-sm text-slate-400 mb-4 font-light">
@@ -1361,54 +829,50 @@ const AndroidPortfolio = () => {
         </div>
       </section>
 
-      <section id="projects" className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-slate-800/40 backdrop-blur-xl rounded-full border border-cyan-500/20">
-              {/* <Terminal size={16} className="text-cyan-400" /> */}
-              {/* <span className="text-cyan-400 text-sm font-medium">
-                PORTFOLIO
-              </span> */}
+      <section id="projects" className="py-20 sm:py-32 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-16 sm:mb-20">
+            <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-4 py-2 bg-slate-800/40 backdrop-blur-xl rounded-full border border-cyan-500/20">
               <Sparkles size={16} className="text-cyan-400" />
               <span className="text-cyan-400 text-sm font-medium">
                 PORTFOLIO
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white px-4">
               Featured Projects
             </h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto font-light">
+            <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-light px-4">
               Production apps serving millions of users with exceptional
               performance and UX
             </p>
           </div>
 
-          <div className="space-y-12">
+          <div className="space-y-8 sm:space-y-12">
             {projects.map((project, index) => (
               <div key={project.title} className="group relative">
-                <div className="relative p-8 md:p-12 bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 rounded-3xl hover:border-cyan-500/50 transition-all duration-500 shadow-2xl hover:shadow-cyan-500/10">
+                <div className="relative p-6 sm:p-8 md:p-12 bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 rounded-2xl sm:rounded-3xl hover:border-cyan-500/50 transition-all duration-500 shadow-2xl hover:shadow-cyan-500/10 overflow-hidden">
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-5 rounded-3xl transition-opacity duration-500`}
+                    className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-5 rounded-2xl sm:rounded-3xl transition-opacity duration-500`}
                   />
 
                   <div className="relative">
-                    <div className="mb-8">
+                    <div className="mb-6 sm:mb-8">
                       <div
-                        className={`inline-block px-4 py-2 bg-gradient-to-r ${project.gradient} rounded-xl text-sm font-bold mb-6 shadow-lg`}
+                        className={`inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r ${project.gradient} rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold mb-4 sm:mb-6 shadow-lg`}
                       >
                         Featured Project {index + 1}
                       </div>
-                      <h3 className="text-3xl md:text-4xl font-bold mb-4 text-white group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-white group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
                         {project.title}
                       </h3>
-                      <p className="text-slate-400 text-lg mb-6 leading-relaxed font-light">
+                      <p className="text-sm sm:text-base md:text-lg text-slate-400 mb-4 sm:mb-6 leading-relaxed font-light">
                         {project.longDescription}
                       </p>
-                      <div className="flex flex-wrap gap-2 mb-8">
+                      <div className="flex flex-wrap gap-2 mb-6 sm:mb-8">
                         {project.tech.map((tech) => (
                           <span
                             key={tech}
-                            className="px-3 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm font-medium text-slate-300 backdrop-blur-sm"
+                            className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-lg text-xs sm:text-sm font-medium text-slate-300 backdrop-blur-sm"
                           >
                             {tech}
                           </span>
@@ -1416,17 +880,17 @@ const AndroidPortfolio = () => {
                       </div>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
-                      <div className="md:col-span-1">
-                        <h4 className="text-lg font-bold mb-4 text-white flex items-center gap-2">
-                          <Eye size={20} className="text-cyan-400" />
+                    <div className="grid md:grid-cols-3 gap-6 sm:gap-8 overflow-hidden">
+                      <div className="md:col-span-1 min-w-0">
+                        <h4 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 text-white flex items-center gap-2">
+                          <Eye size={18} className="text-cyan-400" />
                           App Screens
                         </h4>
-                        <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-900">
+                        <div className="flex gap-3 overflow-x-auto pb-4 -mx-2 px-2 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-900">
                           {project.images.map((image, imgIndex) => (
                             <div
                               key={imgIndex}
-                              className="group/img relative flex-shrink-0 w-24 h-48 bg-slate-800/40 backdrop-blur-xl rounded-lg overflow-hidden border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 shadow-xl cursor-pointer hover:scale-105"
+                              className="group/img relative flex-shrink-0 w-20 sm:w-24 h-40 sm:h-48 bg-slate-800/40 backdrop-blur-xl rounded-lg overflow-hidden border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 shadow-xl cursor-pointer hover:scale-105"
                               onClick={() =>
                                 setSelectedImageModal({ image, project })
                               }
@@ -1487,38 +951,42 @@ const AndroidPortfolio = () => {
                         </div>
                       </div>
 
-                      <div className="md:col-span-2 grid md:grid-cols-2 gap-8">
-                        <div>
-                          <h4 className="text-lg font-bold mb-4 text-white flex items-center gap-2">
-                            <CheckCircle size={20} className="text-cyan-400" />
+                      <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 min-w-0">
+                        <div className="min-w-0">
+                          <h4 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 text-white flex items-center gap-2">
+                            <CheckCircle size={18} className="text-cyan-400" />
                             Key Features
                           </h4>
-                          <div className="space-y-3">
+                          <div className="space-y-2 sm:space-y-3">
                             {project.features.map((feature, i) => (
                               <div
                                 key={i}
-                                className="flex items-center gap-3 text-slate-300 p-3 bg-slate-800/30 rounded-xl border border-slate-700/30 backdrop-blur-sm"
+                                className="flex items-center gap-2 sm:gap-3 text-slate-300 p-2.5 sm:p-3 bg-slate-800/30 rounded-lg sm:rounded-xl border border-slate-700/30 backdrop-blur-sm"
                               >
-                                <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full shadow-lg shadow-cyan-400/50" />
-                                <span className="font-light">{feature}</span>
+                                <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full shadow-lg shadow-cyan-400/50 flex-shrink-0" />
+                                <span className="font-light text-xs sm:text-sm md:text-base break-words">
+                                  {feature}
+                                </span>
                               </div>
                             ))}
                           </div>
                         </div>
 
-                        <div>
-                          <h4 className="text-lg font-bold mb-4 text-white flex items-center gap-2">
-                            <Star size={20} className="text-purple-400" />
+                        <div className="min-w-0">
+                          <h4 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 text-white flex items-center gap-2">
+                            <Star size={18} className="text-purple-400" />
                             Highlights
                           </h4>
-                          <div className="space-y-3">
+                          <div className="space-y-2 sm:space-y-3">
                             {project.highlights.map((highlight, i) => (
                               <div
                                 key={i}
-                                className="flex items-center gap-3 text-slate-300 p-3 bg-slate-800/30 rounded-xl border border-slate-700/30 backdrop-blur-sm"
+                                className="flex items-center gap-2 sm:gap-3 text-slate-300 p-2.5 sm:p-3 bg-slate-800/30 rounded-lg sm:rounded-xl border border-slate-700/30 backdrop-blur-sm"
                               >
-                                <div className="w-1.5 h-1.5 bg-purple-400 rounded-full shadow-lg shadow-purple-400/50" />
-                                <span className="font-light">{highlight}</span>
+                                <div className="w-1.5 h-1.5 bg-purple-400 rounded-full shadow-lg shadow-purple-400/50 flex-shrink-0" />
+                                <span className="font-light text-xs sm:text-sm md:text-base break-words">
+                                  {highlight}
+                                </span>
                               </div>
                             ))}
                           </div>
@@ -1526,16 +994,16 @@ const AndroidPortfolio = () => {
                       </div>
                     </div>
 
-                    <div className="mt-8 grid grid-cols-3 gap-4">
+                    <div className="mt-6 sm:mt-8 grid grid-cols-3 gap-3 sm:gap-4">
                       {Object.entries(project.metrics).map(([key, value]) => (
                         <div
                           key={key}
-                          className="bg-slate-900/60 backdrop-blur-sm rounded-2xl p-4 flex flex-col justify-center items-center border border-slate-700/30 hover:border-cyan-500/50 transition-all duration-300 shadow-lg"
+                          className="bg-slate-900/60 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 flex flex-col justify-center items-center border border-slate-700/30 hover:border-cyan-500/50 transition-all duration-300 shadow-lg"
                         >
-                          <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-1">
+                          <div className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-1">
                             {value}
                           </div>
-                          <div className="text-xs text-slate-400 uppercase tracking-wider text-center font-light">
+                          <div className="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider text-center font-light">
                             {key}
                           </div>
                         </div>
@@ -1549,45 +1017,45 @@ const AndroidPortfolio = () => {
         </div>
       </section>
 
-      <section id="impact" className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-slate-800/40 backdrop-blur-xl rounded-full border border-purple-500/20">
+      <section id="impact" className="py-20 sm:py-32 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-16 sm:mb-20">
+            <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-4 py-2 bg-slate-800/40 backdrop-blur-xl rounded-full border border-purple-500/20">
               <Award size={16} className="text-purple-400" />
               <span className="text-purple-400 text-sm font-medium">
                 ACHIEVEMENTS
               </span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white px-4">
               Industry Impact
             </h2>
-            <p className="text-xl text-slate-400 font-light">
+            <p className="text-base sm:text-lg md:text-xl text-slate-400 font-light px-4">
               Recognition and achievements in the Android development community
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {achievements.map((achievement) => (
               <div
                 key={achievement.title}
-                className="group relative p-8 bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 rounded-3xl hover:border-purple-500/50 transition-all duration-500 text-center hover:scale-105 shadow-xl hover:shadow-2xl hover:shadow-purple-500/20"
+                className="group relative p-6 sm:p-8 bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 rounded-2xl sm:rounded-3xl hover:border-purple-500/50 transition-all duration-500 text-center hover:scale-105 shadow-xl hover:shadow-2xl hover:shadow-purple-500/20"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative">
                   <div
-                    className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${achievement.color} p-5 group-hover:scale-110 transition-transform duration-300 shadow-xl`}
+                    className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-xl sm:rounded-2xl bg-gradient-to-br ${achievement.color} p-4 sm:p-5 group-hover:scale-110 transition-transform duration-300 shadow-xl`}
                   >
                     <achievement.icon className="w-full h-full text-white" />
                   </div>
-                  <div className="text-sm text-slate-500 font-medium mb-2">
+                  <div className="text-xs sm:text-sm text-slate-500 font-medium mb-2">
                     {achievement.year}
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-white">
+                  <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">
                     {achievement.title}
                   </h3>
-                  <p className="text-slate-400 font-light text-sm">
+                  <p className="text-slate-400 font-light text-xs sm:text-sm">
                     {achievement.desc}
                   </p>
                 </div>
@@ -1597,54 +1065,54 @@ const AndroidPortfolio = () => {
         </div>
       </section>
 
-      <section id="testimonials" className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-slate-800/40 backdrop-blur-xl rounded-full border border-cyan-500/20">
+      <section id="testimonials" className="py-20 sm:py-32 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-16 sm:mb-20">
+            <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-4 py-2 bg-slate-800/40 backdrop-blur-xl rounded-full border border-cyan-500/20">
               <MessageSquare size={16} className="text-cyan-400" />
               <span className="text-cyan-400 text-sm font-medium">
                 TESTIMONIALS
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white px-4">
               Client Success Stories
             </h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto font-light">
+            <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-light px-4">
               Trusted by companies worldwide to deliver exceptional results
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.name}
-                className="group relative p-8 bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 rounded-3xl hover:border-cyan-500/50 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/10 hover:scale-105"
+                className="group relative p-6 sm:p-8 bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 rounded-2xl sm:rounded-3xl hover:border-cyan-500/50 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/10 hover:scale-105"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative">
-                  <div className="flex gap-1 mb-6">
+                  <div className="flex gap-1 mb-4 sm:mb-6">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                        className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"
                       />
                     ))}
                   </div>
 
-                  <p className="text-slate-300 mb-6 leading-relaxed font-light">
+                  <p className="text-sm sm:text-base text-slate-300 mb-4 sm:mb-6 leading-relaxed font-light">
                     "{testimonial.text}"
                   </p>
 
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center font-bold text-white shadow-lg">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center font-bold text-white shadow-lg text-sm sm:text-base flex-shrink-0">
                       {testimonial.avatar}
                     </div>
                     <div>
-                      <div className="font-bold text-white">
+                      <div className="font-bold text-white text-sm sm:text-base">
                         {testimonial.name}
                       </div>
-                      <div className="text-sm text-slate-400 font-light">
+                      <div className="text-xs sm:text-sm text-slate-400 font-light">
                         {testimonial.role}
                       </div>
                     </div>
@@ -1656,25 +1124,25 @@ const AndroidPortfolio = () => {
         </div>
       </section>
 
-      <section id="contact" className="py-32 relative">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-slate-800/40 backdrop-blur-xl rounded-full border border-cyan-500/20">
+      <section id="contact" className="py-20 sm:py-32 relative">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-4 py-2 bg-slate-800/40 backdrop-blur-xl rounded-full border border-cyan-500/20">
             <Mail size={16} className="text-cyan-400" />
             <span className="text-cyan-400 text-sm font-medium">CONTACT</span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white">
             Let's Build Something Exceptional
           </h2>
-          <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto font-light">
+          <p className="text-base sm:text-lg md:text-xl text-slate-400 mb-8 sm:mb-12 max-w-2xl mx-auto font-light">
             Available for consulting, technical leadership roles, and ambitious
             Android projects
           </p>
 
-          <div className="flex flex-wrap gap-4 justify-center mb-16">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center mb-12 sm:mb-16">
             <a
               href="mailto:zameersahil318@gmail.com"
-              className="group px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-semibold hover:shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 hover:scale-105 flex items-center gap-3 shadow-xl"
+              className="group px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-semibold hover:shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3 shadow-xl w-full sm:w-auto"
             >
               <Mail size={20} />
               Email Me
@@ -1683,23 +1151,23 @@ const AndroidPortfolio = () => {
               href="https://github.com/zameer-sahil"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl font-semibold hover:bg-slate-800/60 hover:border-cyan-500/50 transition-all duration-300 hover:scale-105 flex items-center gap-3 shadow-xl"
+              className="px-6 sm:px-8 py-3 sm:py-4 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl font-semibold hover:bg-slate-800/60 hover:border-cyan-500/50 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3 shadow-xl w-full sm:w-auto"
             >
               <Github size={20} />
               GitHub
             </a>
             <a
-              href="www.linkedin.com/in/zameer-hussain-286250252"
+              href="https://www.linkedin.com/in/zameer-hussain-286250252"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl font-semibold hover:bg-slate-800/60 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 flex items-center gap-3 shadow-xl"
+              className="px-6 sm:px-8 py-3 sm:py-4 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl font-semibold hover:bg-slate-800/60 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3 shadow-xl w-full sm:w-auto"
             >
               <Linkedin size={20} />
               LinkedIn
             </a>
           </div>
 
-          <div className="text-slate-500 text-sm font-light">
+          <div className="text-slate-500 text-xs sm:text-sm font-light">
             <p>
               © 2025 Elite Android Developer. Crafted with precision and
               passion.
